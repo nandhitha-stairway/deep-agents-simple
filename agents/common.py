@@ -8,7 +8,7 @@ load_dotenv(BASE_DIR / ".env")
 
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
-
+#reads agent skills if avail
 def read_skill(relative_path: str) -> str:
     path = BASE_DIR / "skills" / relative_path / "SKILL.md"
 

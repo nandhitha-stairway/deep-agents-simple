@@ -8,11 +8,11 @@ from langchain_core.messages import SystemMessage, HumanMessage
 from agents.news_agent import research_news
 from agents.preventive_care_agent import research_prevention
 from agents.surveillance_agent import research_surveillance
-
+#loads env
 BASE_DIR = Path(__file__).resolve().parent
 REPORTS_DIR = BASE_DIR / "reports"
 load_dotenv(BASE_DIR / ".env")
-
+#report path
 def _next_report_path():
     REPORTS_DIR.mkdir(parents=True, exist_ok=True)
     numbers = []
@@ -28,7 +28,7 @@ def run_research(question: str) -> dict:
     """Run three specialist researchers, synthesize their findings, save one report."""
     if not question or not question.strip():
         raise ValueError("Research question cannot be empty.")
-
+#runs 3 agents and stores the resukt
     with ContextThreadPoolExecutor(max_workers=3) as pool:
         futures = [
             pool.submit(research_news, question),
